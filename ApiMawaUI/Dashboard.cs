@@ -8,11 +8,12 @@ public partial class Dashboard : Form
     public Dashboard()
     {
         InitializeComponent();
+        httpVerbsSelection.SelectedItem = "GET"; //set the default value of the http verbs selection to get
     }
     private async void callApi_Click(object sender, EventArgs e)
     {
         //vaidate api url
-        if(api.isVaildUrl(InputURL.Text)== false)
+        if (api.isVaildUrl(InputURL.Text) == false)
         {
             apiresults.Text = "Invalid URL! Please Check URL's Once ex: Accpect(starting : https://) || Not Accpect (http://) ";
             SystemStaus.Text = "API Failed Mawa";
@@ -25,7 +26,9 @@ public partial class Dashboard : Form
 
             //SystemStaus.Text = await Task.Delay(2000); //wait for 2 seconds to show the loading message
 
-            apiresults.Text= await api.CallApiAsync(InputURL.Text); //call the api and get the response
+            apiresults.Text = await api.CallApiAsync(InputURL.Text); //call the api and get the response
+
+            callDataTab.SelectedTab = OutputTab; //select the output tab
 
             SystemStaus.Text = "Ready";
 
@@ -40,5 +43,5 @@ public partial class Dashboard : Form
 
     }
 
-   
+    
 }
